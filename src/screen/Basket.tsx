@@ -16,15 +16,9 @@ export const Basket = () => {
   );
   if (pizza.length < 1) {
     return (
-      <View
-        style={{
-          marginTop: '80%',
-          padding: 5,
-        }}>
-        <Text style={{textAlign: 'center', fontWeight: '700', fontSize: 25}}>
-          Корзина пустая 😕
-        </Text>
-        <Text style={{textAlign: 'center', fontSize: 15}}>
+      <View style={style.emptyBasket}>
+        <Text style={style.emptyTitle}>Корзина пустая 😕</Text>
+        <Text style={style.emptyText}>
           Вероятней всего, вы не заказывали ещё пиццу. Для того, чтобы заказать
           пиццу, перейди на главную страницу.
         </Text>
@@ -32,58 +26,77 @@ export const Basket = () => {
     );
   }
   return (
-    <View style={[style.Container, {paddingTop: top}]}>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          paddingTop: 10,
-          marginBottom: 15,
-        }}>
-        <Text style={{fontWeight: '700', fontSize: 25, marginLeft: 10}}>
-          Корзина
-        </Text>
+    <View style={[style.container, {paddingTop: top}]}>
+      <View style={style.basketHeader}>
+        <Text style={style.headerText}>Корзина</Text>
         <TouchableOpacity
           onPress={() => Dispatch(setReset())}
-          style={{
-            padding: 7,
-            backgroundColor: 'orange',
-            borderRadius: 15,
-            marginRight: 10,
-          }}>
-          <Text style={{color: 'white', fontWeight: '700'}}>
-            Очистить корзину
-          </Text>
+          style={style.headerBtn}>
+          <Text style={style.btnText}>Очистить корзину</Text>
         </TouchableOpacity>
       </View>
       <BasketPizzas />
-      <View
-        style={{
-          justifyContent: 'flex-end',
-          alignItems: 'center',
-          borderTopWidth: 0.5,
-          borderTopColor: 'rgba(166, 164, 164, .3)',
-        }}>
-        <TouchableOpacity
-          style={{
-            padding: 10,
-            backgroundColor: 'orange',
-            alignItems: 'center',
-            borderRadius: 20,
-            marginVertical: 10,
-          }}>
-          <Text style={style.ToatalPrice}> ОФОРМИТЬ ЗА {totalPrice} ТГ</Text>
+      <View style={style.basketInner}>
+        <TouchableOpacity style={style.innerBtn}>
+          <Text style={style.toatalPrice}> ОФОРМИТЬ ЗА {totalPrice} ТГ</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 };
 const style = StyleSheet.create({
-  Container: {
+  emptyBasket: {
+    marginTop: '80%',
+    padding: 5,
+  },
+  emptyTitle: {
+    textAlign: 'center',
+    fontWeight: '700',
+    fontSize: 25,
+  },
+  emptyText: {
+    textAlign: 'center',
+    fontSize: 15,
+  },
+  container: {
     backgroundColor: 'white',
     minHeight: '100%',
   },
-  ToatalPrice: {
+  basketHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingTop: 10,
+    marginBottom: 15,
+  },
+  headerText: {
+    fontWeight: '700',
+    fontSize: 25,
+    marginLeft: 10,
+  },
+  headerBtn: {
+    padding: 7,
+    backgroundColor: 'orange',
+    borderRadius: 15,
+    marginRight: 10,
+  },
+  btnText: {
+    color: 'white',
+    fontWeight: '700',
+  },
+  basketInner: {
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    borderTopWidth: 0.5,
+    borderTopColor: 'rgba(166, 164, 164, .3)',
+  },
+  innerBtn: {
+    padding: 10,
+    backgroundColor: 'orange',
+    alignItems: 'center',
+    borderRadius: 20,
+    marginVertical: 10,
+  },
+  toatalPrice: {
     fontWeight: '700',
     color: 'white',
   },

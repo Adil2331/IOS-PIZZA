@@ -11,8 +11,8 @@ import {
   ActivityIndicator,
   RefreshControl,
 } from 'react-native';
-import {PizzasBlock} from '../components/pizzasBlock';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {PizzasBlock} from '../components/PizzasBlock';
 
 export const Home: React.FC<any> = ({navigation}) => {
   const {top} = useSafeAreaInsets();
@@ -38,12 +38,7 @@ export const Home: React.FC<any> = ({navigation}) => {
   React.useEffect(fetchPost, []);
   if (isLoading) {
     return (
-      <View
-        style={{
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginTop: '100%',
-        }}>
+      <View style={styles.loading}>
         <ActivityIndicator size={'large'} />
         <Text>Загрузка...</Text>
       </View>
@@ -51,32 +46,18 @@ export const Home: React.FC<any> = ({navigation}) => {
   }
 
   return (
-    <View style={[styles.Container, {paddingTop: top}]}>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-around',
-          marginBottom: 12,
-        }}>
-        <View
-          style={{
-            flexDirection: 'row-reverse',
-            alignItems: 'center',
-          }}>
+    <View style={[styles.container, {paddingTop: top}]}>
+      <View style={styles.header}>
+        <View style={styles.headerInner}>
           <Text>React-Pizza</Text>
           <Image
-            style={{
-              width: 30,
-              height: 30,
-              marginRight: 5,
-              transform: [{rotate: '180deg'}],
-            }}
+            style={styles.innerImg}
             source={require('../assets/img/pizzaLogo.png')}
           />
         </View>
       </View>
       <FlatList
-        style={{marginBottom: 40}}
+        style={styles.flatList}
         refreshControl={
           <RefreshControl refreshing={isLoading} onRefresh={fetchPost} />
         }
@@ -95,12 +76,30 @@ export const Home: React.FC<any> = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  Container: {
+  loading: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: '100%',
+  },
+  container: {
     backgroundColor: 'white',
   },
-  Basket: {
-    backgroundColor: 'orange',
-    padding: 10,
-    borderRadius: 10,
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginBottom: 12,
+  },
+  headerInner: {
+    flexDirection: 'row-reverse',
+    alignItems: 'center',
+  },
+  innerImg: {
+    width: 30,
+    height: 30,
+    marginRight: 5,
+    transform: [{rotate: '180deg'}],
+  },
+  flatList: {
+    marginBottom: 40,
   },
 });

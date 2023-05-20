@@ -22,14 +22,14 @@ export const PizzasBlock: React.FC<PizzasBlockProps> = ({
   const pizza = useAppSelector(state => state.basket.basket);
   console.log(pizza);
   return (
-    <View style={styles.Container}>
-      <Image style={styles.HomeImage} source={{uri: imageUrl}} />
-      <Text style={styles.Title}>{title}</Text>
-      <View style={styles.PriceAndCount}>
-        <Text style={styles.Price}>от {price * 4} тг.</Text>
+    <View style={styles.container}>
+      <Image style={styles.homeImage} source={{uri: imageUrl}} />
+      <Text style={styles.title}>{title}</Text>
+      <View style={styles.priceAndCount}>
+        <Text style={styles.price}>от {price * 4} тг.</Text>
         {!pizza.filter(obj => obj.id === id).length ? (
           <TouchableOpacity
-            style={styles.Button}
+            style={styles.button}
             onPress={() =>
               Dispatch(
                 setBasket({
@@ -41,13 +41,13 @@ export const PizzasBlock: React.FC<PizzasBlockProps> = ({
                 }),
               )
             }>
-            <Text style={{color: 'orange'}}>Добавить</Text>
+            <Text style={styles.btnColor}>Добавить</Text>
           </TouchableOpacity>
         ) : (
           <TouchableOpacity
-            style={styles.Button}
+            style={styles.button}
             onPress={() => Dispatch(setRemove(id))}>
-            <Text style={{color: 'orange'}}>Убрать</Text>
+            <Text style={styles.btnColor}>Убрать</Text>
           </TouchableOpacity>
         )}
       </View>
@@ -56,27 +56,27 @@ export const PizzasBlock: React.FC<PizzasBlockProps> = ({
 };
 
 const styles = StyleSheet.create({
-  Container: {
+  container: {
     alignItems: 'center',
     marginTop: 10,
     padding: 10,
     border: 1,
   },
-  Title: {
+  title: {
     fontWeight: '700',
     fontSize: 18,
     marginTop: 10,
   },
-  HomeImage: {
+  homeImage: {
     width: 150,
     height: 150,
   },
-  PriceAndCount: {
+  priceAndCount: {
     marginTop: 10,
     flexDirection: 'row',
     alignItems: 'center',
   },
-  Button: {
+  button: {
     marginLeft: 50,
     color: 'red',
     borderColor: 'orange',
@@ -84,7 +84,10 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 5,
   },
-  Price: {
+  btnColor: {
+    color: 'orange',
+  },
+  price: {
     fontSize: 14,
     fontWeight: '700',
   },
